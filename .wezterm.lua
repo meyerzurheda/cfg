@@ -16,6 +16,10 @@ config.hide_tab_bar_if_only_one_tab = true
 config.default_prog = { "/opt/homebrew/bin/tmux" }
 
 config.window_decorations = "RESIZE"
+wezterm.on("gui-startup", function(cmd)
+	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+	window:gui_window():maximize()
+end)
 
 -- and finally, return the configuration to wezterm
 return config
