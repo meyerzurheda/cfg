@@ -76,3 +76,16 @@ export GOPRIVATE=github.com/baupal
 export PATH=$PATH:$(go env GOPATH)/bin
 
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export DBT_SENSITIVE=True
+
+alias a='git add --intent-to-add . && git add --patch'
+alias f='git fetch && git pull --rebase && git push'
+
+export GITHUB_TOKEN=$(gh auth token)
+
+function codesync {
+  ORG="${1-baupal}"
+  ghorg clone "$ORG" --token=$GITHUB_TOKEN --skip-archived --skip-forks --include-submodules --concurrency=50 &
+  wait
+}
